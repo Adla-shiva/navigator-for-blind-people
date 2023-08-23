@@ -1,0 +1,47 @@
+    # loop over detected objects and calculate speeds
+    if(human_rects!=None):
+        for (x, y, w, h) in human_rects:
+        # calculate object speed based on previous frame
+            if len(object_speeds) > 0:
+                last_x, last_y, last_w, last_h, last_speed = object_speeds[-1]
+                curr_speed = ((x - last_x) ** 2 + (y - last_y) ** 2) ** 0.5 / (1.0 / cap.get(cv2.CAP_PROP_FPS)) / 1000.0 * 3600.0
+                object_speeds.append((x, y, w, h, curr_speed))
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                engine.say("the speed of the person is",curr_speed)
+                cv2.putText(frame, f'{curr_speed:.2f} px/s', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                engine.runAndWait()
+    
+            else:
+                object_speeds.append((x, y, w, h, 0))
+          
+    if(vehicle_rects!):      
+        for (x, y, w, h) in vehicle_rects:
+        # calculate object speed based on previous frame
+            if len(object_speeds) > 0:
+                last_x, last_y, last_w, last_h, last_speed = object_speeds[-1]
+                curr_speed = ((x - last_x) ** 2 + (y - last_y) ** 2) ** 0.5 / (1.0 / cap.get(cv2.CAP_PROP_FPS)) / 1000.0 * 3600.0
+                object_speeds.append((x, y, w, h, curr_speed))
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                cv2.putText(frame, f'{curr_speed:.2f} px/s', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                engine.say("the speed of the vehicle is",curr_speed)
+                engine.runAndWait()
+            else:
+                object_speeds.append((x, y, w, h,0))
+    if(animal_rects!=None):       
+        for (x, y, w, h) in animal_rects:
+        # calculate object speed based on previous frame
+            if len(object_speeds) > 0:
+                last_x, last_y, last_w, last_h, last_speed = object_speeds[-1]
+                curr_speed = ((x - last_x) ** 2 + (y - last_y) ** 2) ** 0.5 / (1.0 / cap.get(cv2.CAP_PROP_FPS)) / 1000.0 * 3600.0
+                object_speeds.append((x, y, w, h, curr_speed))
+                cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                engine.say("the speed of the animal is",curr_speed)
+                cv2.putText(frame, f'{curr_speed:.2f} px/s', (x, y - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+                engine.runAndWait()
+    
+            else:
+                object_speeds.append((x, y, w, h,0))
+           
+            
+            
+  
